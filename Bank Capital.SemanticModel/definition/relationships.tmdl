@@ -1,0 +1,15 @@
+relationship 'Bank to Prudential'
+	fromColumn: Prudential.LEI
+	toColumn: Bank.LEI
+
+relationship 'Period to Prudential'
+	fromColumn: Prudential.Period
+	toColumn: Period.Period
+
+relationship 'Item to Prudential'
+	fromColumn: Prudential.'Item Key'
+	toColumn: Item.'Item Key'
+
+relationship 'Stage to Prudential'
+	fromColumn: Prudential.'Stage Key'
+	toColumn: Stage.'Stage Key'

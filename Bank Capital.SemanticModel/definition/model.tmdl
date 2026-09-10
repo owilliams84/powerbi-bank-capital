@@ -1,0 +1,18 @@
+model Model
+	culture: en-GB
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-US
+
+annotation PBI_QueryOrder = ["Period", "Bank", "Item", "Stage", "Prudential"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Period
+ref table Bank
+ref table Item
+ref table Stage
+ref table Prudential
+ref table Metrics

@@ -1,0 +1,100 @@
+/// One row per bank, quarter, item and IFRS 9 stage. EUR millions; ratios as decimals.
+///
+/// Two amount columns, because the P&L is year to date. 'Amount' is as reported.
+/// 'Quarterly' is the P&L de-cumulated against the same bank's previous quarter within
+/// its own financial year, and is left blank where that cannot be done honestly - the
+/// first quarter in the file, a bank's first quarter in the panel, and three banks that
+/// report their P&L half-yearly. For stocks the two columns are the same.
+table Prudential
+	lineageTag: e80004a8-c025-5911-bb67-3be8b6e838ba
+
+	column LEI
+		dataType: string
+		isHidden
+		lineageTag: cd67d003-0e6c-52e6-a90e-073d3d21501f
+		summarizeBy: none
+		sourceColumn: LEI
+
+	column Period
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5bd40d92-c10d-5678-a343-e337d9945fdc
+		summarizeBy: none
+		sourceColumn: Period
+
+	column 'Item Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 09a6627d-40ff-507c-81ca-758b94cf3139
+		summarizeBy: none
+		sourceColumn: ItemKey
+
+	column 'Stage Key'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4d636af1-f925-5c5f-a558-11a388f8f721
+		summarizeBy: none
+		sourceColumn: StageKey
+
+	/// How many quarters a year-to-date P&L figure spans. 4 is a full year.
+	column 'Quarters In YTD'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bc1d4fba-a2bf-51e0-bf84-67b2dbd6f391
+		summarizeBy: none
+		sourceColumn: QuartersInYTD
+
+	column Amount
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 38fd91a5-af69-517f-874d-4cb69f6f2904
+		summarizeBy: none
+		sourceColumn: Amount
+
+	column Quarterly
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 80834b1a-3aca-592b-90f5-c4e97c987ab7
+		summarizeBy: none
+		sourceColumn: Quarterly
+
+	partition 'Prudential 2023' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/owilliams84/powerbi-bank-capital/main/data/fact_prudential_2023.csv"), [Delimiter=",", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Blanks to Null" = Table.ReplaceValue(#"Promoted Headers", "", null, Replacer.ReplaceValue, {"Quarterly"}),
+				    #"Applied Types" = Table.TransformColumnTypes(#"Blanks to Null", {{"LEI", type text}, {"Period", Int64.Type}, {"ItemKey", Int64.Type}, {"StageKey", Int64.Type}, {"QuartersInYTD", Int64.Type}, {"Amount", type number}, {"Quarterly", type number}})
+				in
+				    #"Applied Types"
+
+	partition 'Prudential 2024' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/owilliams84/powerbi-bank-capital/main/data/fact_prudential_2024.csv"), [Delimiter=",", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Blanks to Null" = Table.ReplaceValue(#"Promoted Headers", "", null, Replacer.ReplaceValue, {"Quarterly"}),
+				    #"Applied Types" = Table.TransformColumnTypes(#"Blanks to Null", {{"LEI", type text}, {"Period", Int64.Type}, {"ItemKey", Int64.Type}, {"StageKey", Int64.Type}, {"QuartersInYTD", Int64.Type}, {"Amount", type number}, {"Quarterly", type number}})
+				in
+				    #"Applied Types"
+
+	partition 'Prudential 2025' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/owilliams84/powerbi-bank-capital/main/data/fact_prudential_2025.csv"), [Delimiter=",", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Blanks to Null" = Table.ReplaceValue(#"Promoted Headers", "", null, Replacer.ReplaceValue, {"Quarterly"}),
+				    #"Applied Types" = Table.TransformColumnTypes(#"Blanks to Null", {{"LEI", type text}, {"Period", Int64.Type}, {"ItemKey", Int64.Type}, {"StageKey", Int64.Type}, {"QuartersInYTD", Int64.Type}, {"Amount", type number}, {"Quarterly", type number}})
+				in
+				    #"Applied Types"
+
+	annotation PBI_ResultType = Table

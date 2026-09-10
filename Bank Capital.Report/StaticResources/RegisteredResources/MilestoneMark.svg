@@ -1,0 +1,6 @@
+<svg viewBox="0 0 120 104" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Milestone BI mark">
+  <polygon points="30,4 90,4 116,52 90,100 30,100 4,52" fill="none" stroke="#FFFFFF" stroke-width="6"/>
+  <line x1="38" y1="78" x2="76" y2="40" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="38" cy="78" r="8" fill="#C9A227"/>
+  <rect x="66" y="26" width="24" height="15" rx="3" fill="#C9A227" transform="rotate(-45 78 33.5)"/>
+</svg>

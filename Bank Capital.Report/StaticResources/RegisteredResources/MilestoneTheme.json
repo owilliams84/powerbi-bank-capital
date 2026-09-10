@@ -1,0 +1,81 @@
+{
+  "name": "MilestoneTheme.json",
+  "dataColors": [
+    "#111F38",
+    "#C9A227",
+    "#7C8598",
+    "#BCC1D2",
+    "#1E7A4C",
+    "#B3261E",
+    "#8A6D14",
+    "#667284"
+  ],
+  "background": "#F4F6FA",
+  "foreground": "#4A5768",
+  "tableAccent": "#0A0917",
+  "good": "#1E7A4C",
+  "neutral": "#667284",
+  "bad": "#B3261E",
+  "textClasses": {
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 14,
+      "color": "#0A0917"
+    },
+    "header": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 11,
+      "color": "#0A0917"
+    },
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 9,
+      "color": "#4A5768"
+    },
+    "callout": {
+      "fontFace": "Segoe UI",
+      "fontSize": 20,
+      "color": "#0A0917"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            }
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#E3E7EF"
+              }
+            },
+            "radius": 4
+          }
+        ],
+        "padding": [
+          {
+            "top": 8,
+            "bottom": 8,
+            "left": 10,
+            "right": 10
+          }
+        ],
+        "dropShadow": [
+          {
+            "show": false
+          }
+        ]
+      }
+    }
+  }
+}

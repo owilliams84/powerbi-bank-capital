@@ -1,0 +1,100 @@
+/// One row per bank that appears in any of the three exercises - 129 of them.
+///
+/// The EBA's 'All other banks' aggregate, published beside them under an LEI of twenty
+/// X's, is dropped in the ETL: it is not a bank.
+///
+/// 'In Constant Panel' is Yes for the 101 banks that report CET1 in all twelve quarters.
+/// Trend measures use it, because a sector ratio computed over whoever reported that
+/// quarter moves every time a bank joins or leaves.
+table Bank
+	lineageTag: 7b2ef007-9e5d-5739-912d-b83ae27d6b6a
+
+	/// Legal Entity Identifier - the only identifier the EBA publishes.
+	column LEI
+		dataType: string
+		isKey
+		lineageTag: 9c9dba57-c50a-517f-898e-2af0e9b26322
+		summarizeBy: none
+		sourceColumn: LEI
+
+	column Bank
+		dataType: string
+		lineageTag: 67460e22-e91f-5383-8f13-d8fda06552f8
+		summarizeBy: none
+		sourceColumn: Bank
+
+	column 'Country Code'
+		dataType: string
+		lineageTag: 5500cd64-0e98-5cb2-9c20-1f17ffa3589b
+		summarizeBy: none
+		sourceColumn: CountryCode
+
+	column Country
+		dataType: string
+		lineageTag: e8dff82f-e253-50e3-8574-5f9afcb6c98a
+		summarizeBy: none
+		sourceColumn: Country
+
+	/// 31 December for every bank but one, whose year ends on 30 June. The three
+	/// exercises write it three different ways; the ETL normalises them.
+	column 'Financial Year End'
+		dataType: string
+		lineageTag: f43c9337-6cd0-50b3-8b8a-69f905880d17
+		summarizeBy: none
+		sourceColumn: FinancialYearEnd
+
+	/// By total assets at the bank's latest reported quarter.
+	column 'Size Band'
+		dataType: string
+		lineageTag: b998431e-a8b9-536c-9e91-afef717887c2
+		summarizeBy: none
+		sourceColumn: SizeBand
+		sortByColumn: 'Size Band Sort'
+
+	column 'Size Band Sort'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e39cee77-6326-5d5b-b635-6ab2a7e4ed18
+		summarizeBy: none
+		sourceColumn: SizeBandSort
+
+	column 'In All Exercises'
+		dataType: string
+		lineageTag: fd7beb5e-f75d-57e1-8eb9-11d01cbbb188
+		summarizeBy: none
+		sourceColumn: InAllExercises
+
+	column 'In Constant Panel'
+		dataType: string
+		lineageTag: a595244a-9a86-5cb9-b83c-a9d73c8862c0
+		summarizeBy: none
+		sourceColumn: InConstantPanel
+
+	column 'First Period'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1158d210-3e2d-559d-b79c-6dba5cdac7be
+		summarizeBy: none
+		sourceColumn: FirstPeriod
+
+	column 'Last Period'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ac1410dc-6cea-50e0-a062-848334d3e1d4
+		summarizeBy: none
+		sourceColumn: LastPeriod
+
+	partition Bank = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/owilliams84/powerbi-bank-capital/main/data/dim_bank.csv"), [Delimiter=",", Columns=11, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Applied Types" = Table.TransformColumnTypes(#"Promoted Headers", {{"LEI", type text}, {"Bank", type text}, {"CountryCode", type text}, {"Country", type text}, {"FinancialYearEnd", type text}, {"SizeBand", type text}, {"SizeBandSort", Int64.Type}, {"InAllExercises", type text}, {"InConstantPanel", type text}, {"FirstPeriod", Int64.Type}, {"LastPeriod", Int64.Type}})
+				in
+				    #"Applied Types"
+
+	annotation PBI_ResultType = Table

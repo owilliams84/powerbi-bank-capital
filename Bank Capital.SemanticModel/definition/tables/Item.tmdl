@@ -1,0 +1,82 @@
+/// The 158 supervisory line items used, keyed on the 2025 item code.
+///
+/// The EBA renumbers every item every year - CET1 capital is 2320102, then 2420102,
+/// then 2520102. The ETL maps the earlier codes forward through the 2025 data dictionary
+/// and fails if any row will not map, so a series here is one item across all three
+/// exercises, not three items that happen to share a label.
+table Item
+	lineageTag: 70581f43-a7e4-54fb-9ddf-5fcf2f3620e9
+
+	column 'Item Key'
+		dataType: int64
+		isKey
+		formatString: 0
+		lineageTag: d5bf85d2-7e10-50f5-bfa9-7aa2a32dda86
+		summarizeBy: none
+		sourceColumn: ItemKey
+
+	column Item
+		dataType: string
+		lineageTag: 85b02b4d-6a02-5c48-89f9-0a6907e521b2
+		summarizeBy: none
+		sourceColumn: Label
+
+	/// Capital, Leverage, RWA OV1, P&L, Assets or Liabilities.
+	column Template
+		dataType: string
+		lineageTag: bad3bc8f-f5d6-5c32-ae3c-934f16a36413
+		summarizeBy: none
+		sourceColumn: Template
+
+	/// Yes for the reported ratios. Nothing on the report sums or averages these;
+	/// every ratio shown is recomputed from its numerator and denominator.
+	column 'Is Ratio'
+		dataType: string
+		lineageTag: c3292e03-94b9-5881-906a-dfb3f605037a
+		summarizeBy: none
+		sourceColumn: IsRatio
+
+	/// The ten lines of OV1 that add up to total risk exposure - the top-level risk
+	/// types plus the 2025 output-floor adjustment. Blank for everything else,
+	/// including the 'of which' lines that would double count.
+	column 'RWA Component'
+		dataType: string
+		lineageTag: 3df5c09a-d2b9-59c0-8a6a-f2a81d9cba5f
+		summarizeBy: none
+		sourceColumn: RwaComponent
+		sortByColumn: 'RWA Sort'
+
+	column 'RWA Sort'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 30675826-8840-5412-a9f3-0d439845618f
+		summarizeBy: none
+		sourceColumn: RwaSort
+
+	/// Point in time, Ratio, or Year to date. The P&L is year to date.
+	column Basis
+		dataType: string
+		lineageTag: 0bacffb0-9429-595e-b29d-5f05b63974e2
+		summarizeBy: none
+		sourceColumn: Basis
+
+	column 'Item Sort'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 92f9cac9-276c-5920-ae36-80f7770789fd
+		summarizeBy: none
+		sourceColumn: ItemSort
+
+	partition Item = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/owilliams84/powerbi-bank-capital/main/data/dim_item.csv"), [Delimiter=",", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Applied Types" = Table.TransformColumnTypes(#"Promoted Headers", {{"ItemKey", Int64.Type}, {"Label", type text}, {"Template", type text}, {"IsRatio", type text}, {"RwaComponent", type text}, {"RwaSort", Int64.Type}, {"Basis", type text}, {"ItemSort", Int64.Type}})
+				in
+				    #"Applied Types"
+
+	annotation PBI_ResultType = Table

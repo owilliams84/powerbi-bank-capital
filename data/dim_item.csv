@@ -1,0 +1,159 @@
+ItemKey,Label,Template,IsRatio,RwaComponent,RwaSort,Basis,ItemSort
+2520101,OWN FUNDS,Capital,No,,0,Point in time,2520101
+2520102,COMMON EQUITY TIER 1 CAPITAL (net of deductions and after applying transitional adjustments),Capital,No,,0,Point in time,2520102
+2520103,Capital instruments eligible as CET1 Capital (including share premium and net own capital instruments),Capital,No,,0,Point in time,2520103
+2520104,Retained earnings,Capital,No,,0,Point in time,2520104
+2520105,Accumulated other comprehensive income,Capital,No,,0,Point in time,2520105
+2520106,Other Reserves,Capital,No,,0,Point in time,2520106
+2520107,Funds for general banking risk,Capital,No,,0,Point in time,2520107
+2520108,Minority interest given recognition in CET1 capital,Capital,No,,0,Point in time,2520108
+2520109,Adjustments to CET1 due to prudential filters,Capital,No,,0,Point in time,2520109
+2520110,(-) Intangible assets (including Goodwill),Capital,No,,0,Point in time,2520110
+2520111,(-) DTAs that rely on future profitability and do not arise from temporary differences net of associated DTLs,Capital,No,,0,Point in time,2520111
+2520112,(-) IRB shortfall of credit risk adjustments to expected losses,Capital,No,,0,Point in time,2520112
+2520113,(-) Defined benefit pension fund assets,Capital,No,,0,Point in time,2520113
+2520114,(-) Reciprocal cross holdings in CET1 Capital,Capital,No,,0,Point in time,2520114
+2520115,(-) Excess deduction from AT1 items over AT1 Capital,Capital,No,,0,Point in time,2520115
+2520116,(-) Deductions related to assets which can alternatively be subject to a 1250% risk weight,Capital,No,,0,Point in time,2520116
+2520117,(-) Deductions related to assets which can alternatively be subject to a 1250% risk weight - Of which: from securitisation positions (-),Capital,No,,0,Point in time,2520117
+2520118,(-) Holdings of CET1 capital instruments of financial sector entities where the institiution does not have a significant investment,Capital,No,,0,Point in time,2520118
+2520119,(-) Deductible DTAs that rely on future profitability and arise from temporary differences,Capital,No,,0,Point in time,2520119
+2520120,(-) Holdings of CET1 capital instruments of financial sector entities where the institiution has a significant investment,Capital,No,,0,Point in time,2520120
+2520121,(-) Amount exceding the 17.65% threshold,Capital,No,,0,Point in time,2520121
+2520122,(-) Additional deductions of CET1 Capital due to Article 3 CRR,Capital,No,,0,Point in time,2520122
+2520123,CET1 capital elements or deductions - other,Capital,No,,0,Point in time,2520123
+2520124,Transitional adjustments,Capital,No,,0,Point in time,2520124
+2520125,Transitional adjustments due to grandfathered CET1 Capital instruments (+/-),Capital,No,,0,Point in time,2520125
+2520126,Transitional adjustments due to additional minority interests (+/-),Capital,No,,0,Point in time,2520126
+2520127,Other transitional adjustments to CET1 Capital (+/-),Capital,No,,0,Point in time,2520127
+2520128,ADDITIONAL TIER 1 CAPITAL (net of deductions and after transitional adjustments),Capital,No,,0,Point in time,2520128
+2520129,Additional Tier 1 Capital instruments,Capital,No,,0,Point in time,2520129
+2520130,(-) Excess deduction from T2 items over T2 capital,Capital,No,,0,Point in time,2520130
+2520131,Other Additional Tier 1 Capital components and deductions,Capital,No,,0,Point in time,2520131
+2520132,Additional Tier 1 transitional adjustments,Capital,No,,0,Point in time,2520132
+2520133,TIER 1 CAPITAL (net of deductions and after transitional adjustments),Capital,No,,0,Point in time,2520133
+2520134,TIER 2 CAPITAL (net of deductions and after transitional adjustments),Capital,No,,0,Point in time,2520134
+2520135,Tier 2 Capital instruments,Capital,No,,0,Point in time,2520135
+2520136,Other Tier 2 Capital components and deductions,Capital,No,,0,Point in time,2520136
+2520137,Tier 2 transitional adjustments,Capital,No,,0,Point in time,2520137
+2520138,TOTAL RISK EXPOSURE AMOUNT,Capital,No,,0,Point in time,2520138
+2520139,TOTAL RISK EXPOSURE AMOUNT - Of which: Transitional adjustments included,Capital,No,,0,Point in time,2520139
+2520140,COMMON EQUITY TIER 1 CAPITAL RATIO (transitional period),Capital,Yes,,0,Ratio,2520140
+2520141,TIER 1 CAPITAL RATIO (transitional period),Capital,Yes,,0,Ratio,2520141
+2520142,TOTAL CAPITAL RATIO (transitional period),Capital,Yes,,0,Ratio,2520142
+2520143,COMMON EQUITY TIER 1 CAPITAL (fully loaded),Capital,No,,0,Point in time,2520143
+2520146,COMMON EQUITY TIER 1 CAPITAL RATIO (fully loaded),Capital,Yes,,0,Ratio,2520146
+2520147,Adjustments to CET1 due to IFRS 9 transitional arrangements,Capital,No,,0,Point in time,2520147
+2520148,Adjustments to AT1 due to IFRS 9 transitional arrangements,Capital,No,,0,Point in time,2520148
+2520149,Adjustments to T2 due to IFRS 9 transitional arrangements,Capital,No,,0,Point in time,2520149
+2520150,Adjustments included in RWAs due to IFRS 9 transitional arrangements,Capital,No,,0,Point in time,2520150
+2520151,(-) Insufficient coverage for non-performing exposures,Capital,No,,0,Point in time,2520151
+2520152,(-) Minimum value commitment shortfalls,Capital,No,,0,Point in time,2520152
+2520153,(-) Other foreseeable tax charges,Capital,No,,0,Point in time,2520153
+2520154,TOTAL RISK EXPOSURE AMOUNT - PRE FLOOR,Capital,No,,0,Point in time,2520154
+2520155,COMMON EQUITY TIER 1 CAPITAL RATIO (transitional period - pre floor),Capital,Yes,,0,Ratio,2520155
+2520156,TIER 1 CAPITAL RATIO (transitional period - pre floor),Capital,Yes,,0,Ratio,2520156
+2520157,TOTAL CAPITAL RATIO (transitional period - pre floor),Capital,Yes,,0,Ratio,2520157
+2520201,Credit risk (excluding CCR and Securitisations),RWA OV1,No,Credit risk,1,Point in time,2520201
+2520202,Credit risk (excluding CCR and Securitisations): Of which the standardised approach,RWA OV1,No,,0,Point in time,2520202
+2520203,Credit risk (excluding CCR and Securitisations): Of which the foundation IRB (FIRB) approach,RWA OV1,No,,0,Point in time,2520203
+2520204,Credit risk (excluding CCR and Securitisations): Of which the advanced IRB (AIRB) approach,RWA OV1,No,,0,Point in time,2520204
+2520205,Credit risk (excluding CCR and Securitisations): Of which equity IRB,RWA OV1,No,,0,Point in time,2520205
+2520206,"Counterparty credit risk (CCR, excluding CVA)",RWA OV1,No,Counterparty credit risk,2,Point in time,2520206
+2520207,Credit valuation adjustment - CVA,RWA OV1,No,CVA,3,Point in time,2520207
+2520208,Settlement risk,RWA OV1,No,Settlement,4,Point in time,2520208
+2520209,Securitisation exposures in the banking book (after the cap),RWA OV1,No,Securitisation,5,Point in time,2520209
+2520210,"Position, foreign exchange and commodities risks (Market risk)",RWA OV1,No,Market risk,6,Point in time,2520210
+2520211,"Position, foreign exchange and commodities risks (Market risk): Of which the standardised approach",RWA OV1,No,,0,Point in time,2520211
+2520212,"Position, foreign exchange and commodities risks (Market risk): Of which IMA",RWA OV1,No,,0,Point in time,2520212
+2520213,"Position, foreign exchange and commodities risks (Market risk): Of which securitisations and resecuritisations in the trading book",RWA OV1,No,,0,Point in time,2520213
+2520214,Large exposures in the trading book,RWA OV1,No,Large exposures,7,Point in time,2520214
+2520215,Operational risk,RWA OV1,No,Operational risk,8,Point in time,2520215
+2520216,Operational risk : Of which basic indicator approach,RWA OV1,No,,0,Point in time,2520216
+2520217,Operational risk : Of which standardised approach,RWA OV1,No,,0,Point in time,2520217
+2520218,Operational risk : Of which advanced measurement approach,RWA OV1,No,,0,Point in time,2520218
+2520219,Other risk exposure amounts,RWA OV1,No,Other,9,Point in time,2520219
+2520220,Total Risk exposure amount,RWA OV1,No,,0,Point in time,2520220
+2520221,Total risk exposure amount pre-floor,RWA OV1,No,,0,Point in time,2520221
+2520222,Floor adjustment,RWA OV1,No,Output floor,10,Point in time,2520222
+2520301,Interest income,P&L,No,,0,Year to date,2520301
+2520302,Interest income - Of which debt securities income,P&L,No,,0,Year to date,2520302
+2520303,Interest income - Of which loans and advances income,P&L,No,,0,Year to date,2520303
+2520304,Interest expenses,P&L,No,,0,Year to date,2520304
+2520305,Interest expenses - (Of which deposits expenses),P&L,No,,0,Year to date,2520305
+2520306,Interest expenses - (Of which debt securities issued expenses),P&L,No,,0,Year to date,2520306
+2520307,(Expenses on share capital repayable on demand),P&L,No,,0,Year to date,2520307
+2520308,Dividend income,P&L,No,,0,Year to date,2520308
+2520309,Net Fee and commission income,P&L,No,,0,Year to date,2520309
+2520310,Gains or (-) losses on derecognition of financial assets and liabilities not measured at fair value through profit or loss_ and of non financial assets_ net,P&L,No,,0,Year to date,2520310
+2520311,Gains or (-) losses on financial assets and liabilities held for trading_ net,P&L,No,,0,Year to date,2520311
+2520312,Gains or (-) losses on financial assets and liabilities designated at fair value through profit or loss_ net,P&L,No,,0,Year to date,2520312
+2520313,Gains or (-) losses from hedge accounting_ net,P&L,No,,0,Year to date,2520313
+2520314,Exchange differences [gain or (-) loss]_ net,P&L,No,,0,Year to date,2520314
+2520315,Net other operating income /(expenses),P&L,No,,0,Year to date,2520315
+2520316,TOTAL OPERATING INCOME_ NET,P&L,No,,0,Year to date,2520316
+2520317,(Administrative expenses),P&L,No,,0,Year to date,2520317
+2520318,(Depreciation),P&L,No,,0,Year to date,2520318
+2520319,(Provisions or (-) reversal of provisions),P&L,No,,0,Year to date,2520319
+2520320,(Provisions or (-) reversal of provisions) - (Commitments and guarantees given),P&L,No,,0,Year to date,2520320
+2520321,(Provisions or (-) reversal of provisions) - (Other provisions),P&L,No,,0,Year to date,2520321
+2520322,(Other provisions) - Of which pending legal issues and tax litigation,P&L,No,,0,Year to date,2520322
+2520323,(Other provisions) - Of which restructuring,P&L,No,,0,Year to date,2520323
+2520324,(Impairment or (-) reversal of impairment on financial assets not measured at fair value through profit or loss),P&L,No,,0,Year to date,2520324
+2520325,(Financial assets at fair value through other comprehensive income),P&L,No,,0,Year to date,2520325
+2520326,(Financial assets at amortised cost),P&L,No,,0,Year to date,2520326
+2520327,(Impairment or (-) reversal of impairment of investments in subsidaries_ joint ventures and associates and on non-financial assets),P&L,No,,0,Year to date,2520327
+2520328,(Impairment or (-) reversal of impairment of investments in subsidaries_ joint ventures and associates and on non-financial assets) - (of which Goodwill),P&L,No,,0,Year to date,2520328
+2520329,Negative goodwill recognised in profit or loss,P&L,No,,0,Year to date,2520329
+2520330,Share of the profit or (-) loss of investments in subsidaries_ joint ventures and associates,P&L,No,,0,Year to date,2520330
+2520331,Profit or (-) loss from non-current assets and disposal groups classified as held for sale not qualifying as discontinued operations,P&L,No,,0,Year to date,2520331
+2520332,PROFIT OR (-) LOSS BEFORE TAX FROM CONTINUING OPERATIONS,P&L,No,,0,Year to date,2520332
+2520333,PROFIT OR (-) LOSS AFTER TAX FROM CONTINUING OPERATIONS,P&L,No,,0,Year to date,2520333
+2520334,Profit or (-) loss after tax from discontinued operations,P&L,No,,0,Year to date,2520334
+2520335,PROFIT OR (-) LOSS FOR THE YEAR,P&L,No,,0,Year to date,2520335
+2520336,PROFIT OR (-) LOSS FOR THE YEAR - Of which attributable to owners of the parent,P&L,No,,0,Year to date,2520336
+2520337,"(Increases or (-) decreases of the fund for general banking risks, net)",P&L,No,,0,Year to date,2520337
+2520338,"Modification gains or (-) losses, net",P&L,No,,0,Year to date,2520338
+2520339,(Cash contributions to resolution funds and deposit guarantee schemes),P&L,No,,0,Year to date,2520339
+2520340,(Provisions or (-) reversal of provisions) - (payment commitments to resolution funds and deposit guarantee schemes),P&L,No,,0,Year to date,2520340
+2520901,Tier 1 capital - transitional definition (numerator of Leverage ratio),Leverage,No,,0,Point in time,2520901
+2520902,Tier 1 capital - fully phased-in definition,Leverage,No,,0,Point in time,2520902
+2520903,Total leverage ratio exposures - using a transitional definition of Tier 1 capital,Leverage,No,,0,Point in time,2520903
+2520904,Total leverage ratio exposures - using a fully phased-in definition of Tier 1 capital,Leverage,No,,0,Point in time,2520904
+2520905,Leverage ratio - using a transitional definition of Tier 1 capital,Leverage,Yes,,0,Ratio,2520905
+2520906,Leverage ratio - using a fully phased-in definition of Tier 1 capital,Leverage,Yes,,0,Ratio,2520906
+2521001,"Cash, cash balances at central banks and other demand deposits",Assets,No,,0,Point in time,2521001
+2521002,Financial assets held for trading,Assets,No,,0,Point in time,2521002
+2521003,Non-trading financial assets mandatorily at fair value through profit or loss,Assets,No,,0,Point in time,2521003
+2521004,Financial assets designated at fair value through profit or loss,Assets,No,,0,Point in time,2521004
+2521005,Financial assets at fair value through other comprehensive income,Assets,No,,0,Point in time,2521005
+2521006,Financial assets at amortised cost,Assets,No,,0,Point in time,2521006
+2521007,Derivatives – Hedge accounting,Assets,No,,0,Point in time,2521007
+2521008,Fair value changes of the hedged items in portfolio hedge of interest rate risk,Assets,No,,0,Point in time,2521008
+2521009,Other assets,Assets,No,,0,Point in time,2521009
+2521010,Total Assets,Assets,No,,0,Point in time,2521010
+2521016,"Gross carrying amount: Financial assets at fair value through other comprehensive income, Debt securities",Assets,No,,0,Point in time,2521016
+2521017,"Gross carrying amount: Financial assets at fair value through other comprehensive income, Loans and advances",Assets,No,,0,Point in time,2521017
+2521018,"Gross carrying amount: Financial assets at amortised cost, Debt securities",Assets,No,,0,Point in time,2521018
+2521019,"Gross carrying amount: Financial assets at amortised cost, Loans and advances",Assets,No,,0,Point in time,2521019
+2521026,"Accumulated impairment: Financial assets at fair value through other comprehensive income, Debt securities",Assets,No,,0,Point in time,2521026
+2521027,"Accumulated impairment: Financial assets at fair value through other comprehensive income, Loans and advances",Assets,No,,0,Point in time,2521027
+2521028,"Accumulated impairment: Financial assets at amortised cost, Debt securities",Assets,No,,0,Point in time,2521028
+2521029,"Accumulated impairment: Financial assets at amortised cost, Loans and advances",Assets,No,,0,Point in time,2521029
+2521201,Financial liabilities held for trading,Liabilities,No,,0,Point in time,2521201
+2521202,Trading financial liabilities1,Liabilities,No,,0,Point in time,2521202
+2521203,Financial liabilities designated at fair value through profit or loss,Liabilities,No,,0,Point in time,2521203
+2521204,Financial liabilities measured at amortised cost,Liabilities,No,,0,Point in time,2521204
+2521205,Non-trading non-derivative financial liabilities measured at a cost-based method1,Liabilities,No,,0,Point in time,2521205
+2521206,Derivatives – Hedge accounting,Liabilities,No,,0,Point in time,2521206
+2521207,Fair value changes of the hedged items in portfolio hedge of interest rate risk,Liabilities,No,,0,Point in time,2521207
+2521208,Provisions,Liabilities,No,,0,Point in time,2521208
+2521209,Tax liabilities,Liabilities,No,,0,Point in time,2521209
+2521210,Share capital repayable on demand,Liabilities,No,,0,Point in time,2521210
+2521211,Other liabilities,Liabilities,No,,0,Point in time,2521211
+2521212,Liabilities included in disposal groups classified as held for sale,Liabilities,No,,0,Point in time,2521212
+2521213,Haircuts for trading liabilities at fair value1,Liabilities,No,,0,Point in time,2521213
+2521214,TOTAL LIABILITIES,Liabilities,No,,0,Point in time,2521214
+2521215,Financial liabilities - by instrument and by counterparty sector,Liabilities,No,,0,Point in time,2521215
+2521216,TOTAL EQUITY,Liabilities,No,,0,Point in time,2521216
+2521217,TOTAL EQUITY AND TOTAL LIABILITIES,Liabilities,No,,0,Point in time,2521217

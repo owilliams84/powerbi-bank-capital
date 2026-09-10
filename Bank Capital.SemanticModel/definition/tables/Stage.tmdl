@@ -1,0 +1,38 @@
+/// IFRS 9 impairment stage. Only the gross-carrying-amount and accumulated-impairment
+/// lines are staged; everything else is 'Not staged'.
+table Stage
+	lineageTag: f75dd2d3-e787-5767-85a4-108b8aba9222
+
+	column 'Stage Key'
+		dataType: int64
+		isHidden
+		isKey
+		formatString: 0
+		lineageTag: 432c057a-ba99-5c65-bea4-15b0e48fdb82
+		summarizeBy: none
+		sourceColumn: StageKey
+
+	column Stage
+		dataType: string
+		lineageTag: c5b92cbd-e997-59dc-99dc-4abc8ffd3ce9
+		summarizeBy: none
+		sourceColumn: Stage
+		sortByColumn: 'Stage Key'
+
+	column 'Stage Meaning'
+		dataType: string
+		lineageTag: a5428197-55db-5995-a682-e6e025b6dc69
+		summarizeBy: none
+		sourceColumn: StageMeaning
+
+	partition Stage = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/owilliams84/powerbi-bank-capital/main/data/dim_stage.csv"), [Delimiter=",", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Applied Types" = Table.TransformColumnTypes(#"Promoted Headers", {{"StageKey", Int64.Type}, {"Stage", type text}, {"StageMeaning", type text}})
+				in
+				    #"Applied Types"
+
+	annotation PBI_ResultType = Table

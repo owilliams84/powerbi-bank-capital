@@ -1,0 +1,101 @@
+{
+  "rows_2023": 100223,
+  "key_metrics_rows_dropped_2023": 7728,
+  "rows_2024": 99324,
+  "key_metrics_rows_dropped_2024": 7744,
+  "rows_2025": 91277,
+  "key_metrics_rows_dropped_2025": 0,
+  "aggregate_rows_dropped": 2432,
+  "duplicate_rows_across_exercises": 0,
+  "breakdown_rows_dropped": 42834,
+  "banks": 129,
+  "banks_in_all_three": 113,
+  "banks_in_constant_panel": 101,
+  "banks_by_size_band": {
+    "Over \u20ac500bn": 16,
+    "Under \u20ac50bn": 47,
+    "\u20ac150bn to \u20ac500bn": 21,
+    "\u20ac50bn to \u20ac150bn": 45
+  },
+  "non_calendar_year_banks": [
+    [
+      "Mediobanca - Banca di Credito Finanziario S.p.A.",
+      "30 June"
+    ]
+  ],
+  "country_codes": [
+    "AT",
+    "BE",
+    "CY",
+    "DE",
+    "DK",
+    "EE",
+    "ES",
+    "FI",
+    "FR",
+    "GR",
+    "HU",
+    "IE",
+    "IS",
+    "IT",
+    "LI",
+    "LT",
+    "LU",
+    "LV",
+    "MT",
+    "NL",
+    "NO",
+    "PL",
+    "PT",
+    "RO",
+    "SE",
+    "SI"
+  ],
+  "periods": [
+    "202209",
+    "202212",
+    "202303",
+    "202306",
+    "202309",
+    "202312",
+    "202403",
+    "202406",
+    "202409",
+    "202412",
+    "202503",
+    "202506"
+  ],
+  "pl_rows": 51920,
+  "pl_rows_not_decumulable": 5160,
+  "pl_not_decumulable_periods": {
+    "202209": 4320,
+    "202212": 120,
+    "202306": 120,
+    "202309": 40,
+    "202312": 120,
+    "202406": 120,
+    "202409": 80,
+    "202412": 120,
+    "202506": 120
+  },
+  "items": 158,
+  "items_by_template": {
+    "Assets": 18,
+    "Capital": 55,
+    "Leverage": 6,
+    "Liabilities": 17,
+    "P&L": 40,
+    "RWA OV1": 22
+  },
+  "ratio_items": 9,
+  "cet1_ratio_reported_vs_computed_max_diff": 4.996958044567457e-07,
+  "cet1_latest": {
+    "period": "202506",
+    "aggregate_ratio": 0.162328,
+    "simple_average_of_ratios": 0.227045,
+    "median": 0.180034,
+    "banks": 119
+  },
+  "rwa_components_vs_total_max_gap": 0.001,
+  "rwa_components_vs_total_gaps_over_1m": 0
+}

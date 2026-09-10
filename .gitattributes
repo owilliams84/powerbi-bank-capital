@@ -1,0 +1,6 @@
+# Power BI writes PBIP/PBIR/TMDL with LF, and TMDL is indentation-sensitive. Pin LF everywhere
+# so Windows checkouts do not rewrite the definition files and produce diff churn against
+# anything Desktop or the generators write back.
+* text=auto eol=lf
+
+*.png binary

@@ -1,0 +1,73 @@
+/// The twelve quarter-ends the three exercises cover, September 2022 to June 2025. Each
+/// exercise publishes four quarters; they abut without overlapping.
+///
+/// Not a date table on purpose. Supervisory data is quarter-end snapshots, and every
+/// stock measure here reads the last quarter in view rather than walking a calendar.
+table Period
+	lineageTag: e9ae2e48-cfcf-5c5d-9d80-9d212e7fe491
+
+	column Period
+		dataType: int64
+		isHidden
+		isKey
+		formatString: 0
+		lineageTag: 815c5f02-d4a2-5cdd-a699-ca25f6d6f184
+		summarizeBy: none
+		sourceColumn: Period
+
+	column 'Quarter End'
+		dataType: dateTime
+		formatString: d mmm yyyy
+		lineageTag: 5c65b7fe-a000-5a0d-b7d5-44253543c118
+		summarizeBy: none
+		sourceColumn: QuarterEnd
+
+	column Quarter
+		dataType: string
+		lineageTag: 9f3164bd-0261-548c-b7d3-9b064e046495
+		summarizeBy: none
+		sourceColumn: Label
+		sortByColumn: 'Period Sort'
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 8d65d8ab-11b3-57f8-b091-d0ca2491e38e
+		summarizeBy: none
+		sourceColumn: Year
+
+	column 'Quarter No'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6a8e685b-a9a7-5738-998a-0e7a9c5754a9
+		summarizeBy: none
+		sourceColumn: Quarter
+
+	column 'Period Sort'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fe8214ce-2ec3-58fc-aad4-255db5ad959a
+		summarizeBy: none
+		sourceColumn: Sort
+
+	/// The EBA transparency exercise that published this quarter.
+	column Exercise
+		dataType: int64
+		formatString: 0
+		lineageTag: e87fa161-129f-57b5-ba9b-673dbcaf8090
+		summarizeBy: none
+		sourceColumn: Exercise
+
+	partition Period = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://raw.githubusercontent.com/owilliams84/powerbi-bank-capital/main/data/dim_period.csv"), [Delimiter=",", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Applied Types" = Table.TransformColumnTypes(#"Promoted Headers", {{"Period", Int64.Type}, {"QuarterEnd", type date}, {"Label", type text}, {"Year", Int64.Type}, {"Quarter", Int64.Type}, {"Sort", Int64.Type}, {"Exercise", Int64.Type}})
+				in
+				    #"Applied Types"
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,73 @@
+EVALUATE
+UNION(
+    SELECTCOLUMNS(
+        SUMMARIZECOLUMNS(
+            'Period'[Quarter],
+            "v_cet1", [CET1 Capital],
+            "v_trea", [Total Risk Exposure],
+            "v_ratio", [CET1 Ratio],
+            "v_avg", [CET1 Ratio, Average of Banks],
+            "v_median", [CET1 Ratio, Median of Banks],
+            "v_banks", [Banks Reporting],
+            "v_leverage", [Leverage Ratio],
+            "v_stage3", [Stage 3 Ratio],
+            "v_panel", [CET1 Ratio (Constant Panel)],
+            "v_profit_q", [Profit in Quarter]
+        ),
+        "grain", "quarter",
+        "key", 'Period'[Quarter],
+        "cet1", ROUND([v_cet1] * 1000, 3),
+        "trea", ROUND([v_trea] * 1000, 3),
+        "ratio", ROUND([v_ratio], 8),
+        "avg", ROUND([v_avg], 8),
+        "median", ROUND([v_median], 8),
+        "banks", [v_banks],
+        "leverage", ROUND([v_leverage], 8),
+        "stage3", ROUND([v_stage3], 8),
+        "panel", ROUND([v_panel], 8),
+        "profit", ROUND([v_profit_q] * 1000, 3),
+        "profit_naive", BLANK()
+    ),
+    SELECTCOLUMNS(
+        SUMMARIZECOLUMNS(
+            'Bank'[Size Band],
+            "v_cet1", [CET1 Capital],
+            "v_trea", [Total Risk Exposure],
+            "v_ratio", [CET1 Ratio],
+            "v_avg", [CET1 Ratio, Average of Banks],
+            "v_median", [CET1 Ratio, Median of Banks],
+            "v_banks", [Banks Reporting],
+            "v_leverage", [Leverage Ratio],
+            "v_stage3", [Stage 3 Ratio],
+            "v_panel", [CET1 Ratio (Constant Panel)],
+            "v_profit", [Profit FY]
+        ),
+        "grain", "size",
+        "key", 'Bank'[Size Band],
+        "cet1", ROUND([v_cet1] * 1000, 3),
+        "trea", ROUND([v_trea] * 1000, 3),
+        "ratio", ROUND([v_ratio], 8),
+        "avg", ROUND([v_avg], 8),
+        "median", ROUND([v_median], 8),
+        "banks", [v_banks],
+        "leverage", ROUND([v_leverage], 8),
+        "stage3", ROUND([v_stage3], 8),
+        "panel", ROUND([v_panel], 8),
+        "profit", ROUND([v_profit] * 1000, 3),
+        "profit_naive", BLANK()
+    ),
+    SELECTCOLUMNS(
+        SUMMARIZECOLUMNS(
+            'Period'[Year],
+            "v_profit", [Profit FY],
+            "v_naive", [Profit, YTD Figures Added]
+        ),
+        "grain", "year",
+        "key", FORMAT('Period'[Year], "0"),
+        "cet1", BLANK(), "trea", BLANK(), "ratio", BLANK(), "avg", BLANK(),
+        "median", BLANK(), "banks", BLANK(), "leverage", BLANK(), "stage3", BLANK(),
+        "panel", BLANK(),
+        "profit", ROUND([v_profit] * 1000, 3),
+        "profit_naive", ROUND([v_naive] * 1000, 3)
+    )
+)

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Bank Capital"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "8f3c6a21-4e97-4d0b-9c58-2b1e7d4a6f93"
+  }
+}

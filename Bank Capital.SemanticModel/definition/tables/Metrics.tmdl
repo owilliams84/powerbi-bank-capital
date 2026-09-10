@@ -1,0 +1,451 @@
+/// Measure-only table. Nothing here stores data; the hidden column exists because
+/// a table needs one. Every number on the report comes from here.
+table Metrics
+	lineageTag: 01d16704-7e91-53b4-b289-d1fdbd335295
+
+	/// Common Equity Tier 1 after deductions and transitional adjustments, at the last quarter
+	/// in view.
+	measure 'CET1 Capital' =
+			VAR p = MAX('Period'[Period Sort])
+			RETURN
+			    CALCULATE(
+			        SUM('Prudential'[Amount]) / 1000,
+			        'Item'[Item Key] = 2520102,
+			        'Period'[Period Sort] = p
+			    )
+		formatString: €#,0\b\n
+		lineageTag: ff643fab-3e33-5032-8123-25d211f48430
+
+	measure 'Tier 1 Capital' =
+			VAR p = MAX('Period'[Period Sort])
+			RETURN
+			    CALCULATE(
+			        SUM('Prudential'[Amount]) / 1000,
+			        'Item'[Item Key] = 2520133,
+			        'Period'[Period Sort] = p
+			    )
+		formatString: €#,0\b\n
+		lineageTag: eb52ed87-b8b2-59c0-9f31-7688f017b49e
+
+	/// Total capital: Tier 1 plus Tier 2.
+	measure 'Own Funds' =
+			VAR p = MAX('Period'[Period Sort])
+			RETURN
+			    CALCULATE(
+			        SUM('Prudential'[Amount]) / 1000,
+			        'Item'[Item Key] = 2520101,
+			        'Period'[Period Sort] = p
+			    )
+		formatString: €#,0\b\n
+		lineageTag: 89b96c5a-e7d5-5829-a9d4-f87214817516
+
+	/// Risk-weighted assets - the denominator of every capital ratio.
+	measure 'Total Risk Exposure' =
+			VAR p = MAX('Period'[Period Sort])
+			RETURN
+			    CALCULATE(
+			        SUM('Prudential'[Amount]) / 1000,
+			        'Item'[Item Key] = 2520138,
+			        'Period'[Period Sort] = p
+			    )
+		formatString: €#,0\b\n
+		lineageTag: 681b0e9f-6cbf-56c4-9aad-618fb15cf028
+
+	/// Risk exposure before the CRR3 output floor. Reported from 2025 only.
+	measure 'RWA Pre-Floor' =
+			VAR p = MAX('Period'[Period Sort])
+			RETURN
+			    CALCULATE(
+			        SUM('Prudential'[Amount]) / 1000,
+			        'Item'[Item Key] = 2520154,
+			        'Period'[Period Sort] = p
+			    )
+		formatString: €#,0\b\n
+		lineageTag: c0e0ae53-a9bc-52d1-ac0f-e109e4e09880
+
+	measure 'Total Assets' =
+			VAR p = MAX('Period'[Period Sort])
+			RETURN
+			    CALCULATE(
+			        SUM('Prudential'[Amount]) / 1000,
+			        'Item'[Item Key] = 2521010,
+			        'Period'[Period Sort] = p
+			    )
+		formatString: €#,0\b\n
+		lineageTag: a60e0d3c-1218-5a73-ae0e-f6243c727004
+
+	/// Accounting equity, FINREP.
+	measure 'Total Equity' =
+			VAR p = MAX('Period'[Period Sort])
+			RETURN
+			    CALCULATE(
+			        SUM('Prudential'[Amount]) / 1000,
+			        'Item'[Item Key] = 2521216,
+			        'Period'[Period Sort] = p
+			    )
+		formatString: €#,0\b\n
+		lineageTag: dc56c25f-5614-52e6-8de0-db0475d3b394
+
+	measure 'Leverage Exposure' =
+			VAR p = MAX('Period'[Period Sort])
+			RETURN
+			    CALCULATE(
+			        SUM('Prudential'[Amount]) / 1000,
+			        'Item'[Item Key] = 2520903,
+			        'Period'[Period Sort] = p
+			    )
+		formatString: €#,0\b\n
+		lineageTag: bb1cf564-5c7a-56c6-a294-fa91180aa561
+
+	measure 'Tier 1 for Leverage' =
+			VAR p = MAX('Period'[Period Sort])
+			RETURN
+			    CALCULATE(
+			        SUM('Prudential'[Amount]) / 1000,
+			        'Item'[Item Key] = 2520901,
+			        'Period'[Period Sort] = p
+			    )
+		formatString: €#,0\b\n
+		lineageTag: d796e5c6-a94b-5a07-904e-05faad77e118
+
+	/// Banks with a CET1 figure in the last quarter in view.
+	measure 'Banks Reporting' =
+			VAR p = MAX('Period'[Period Sort])
+			RETURN
+			    CALCULATE(
+			        DISTINCTCOUNT('Prudential'[LEI]),
+			        'Item'[Item Key] = 2520102,
+			        'Period'[Period Sort] = p
+			    )
+		formatString: #,0
+		lineageTag: a715af74-cbd9-5ab9-abe3-6163ccc80cc2
+
+	/// Capital over risk-weighted assets, summed first and divided once - the ratio of the
+	/// sector, or of whatever is in view. The reported CET1 ratio is never averaged.
+	measure 'CET1 Ratio' = DIVIDE([CET1 Capital], [Total Risk Exposure])
+		formatString: 0.0%
+		lineageTag: 9d99903f-7727-5220-a905-0ae6f7710786
+
+	measure 'Tier 1 Ratio' = DIVIDE([Tier 1 Capital], [Total Risk Exposure])
+		formatString: 0.0%
+		lineageTag: 2b9eda38-7428-5bc2-9999-304e84a0a557
+
+	measure 'Total Capital Ratio' = DIVIDE([Own Funds], [Total Risk Exposure])
+		formatString: 0.0%
+		lineageTag: 42c26ea7-7b81-5f38-8890-9fd339a87243
+
+	/// Tier 1 over total exposure, unweighted. The 3% minimum does not care about risk weights.
+	measure 'Leverage Ratio' = DIVIDE([Tier 1 for Leverage], [Leverage Exposure])
+		formatString: 0.00%
+		lineageTag: 92d6fea3-1753-568d-b0cb-7a356f8587e3
+
+	/// Risk-weighted assets per euro of balance sheet. Low density is what an internal model
+	/// buys, and what the output floor is there to limit.
+	measure 'RWA Density' = DIVIDE([Total Risk Exposure], [Total Assets])
+		formatString: 0.0%
+		lineageTag: 284a777d-b673-51a4-900c-147f77d3c8bc
+
+	/// Each bank's ratio, averaged with equal weight. What you get by averaging the reported
+	/// ratio column - and 6.5 points above the sector's actual ratio at June 2025, because the
+	/// small banks carry the most capital per euro of risk and each one counts as much as the
+	/// largest. Kept so the report can show the two side by side.
+	measure 'CET1 Ratio, Average of Banks' =
+			AVERAGEX(
+			    FILTER(VALUES('Bank'[LEI]), NOT ISBLANK([CET1 Ratio])),
+			    [CET1 Ratio]
+			)
+		formatString: 0.0%
+		lineageTag: 62e75b4f-91e9-59aa-b1dc-c47b6e2db7eb
+
+	/// The typical bank.
+	measure 'CET1 Ratio, Median of Banks' =
+			MEDIANX(
+			    FILTER(VALUES('Bank'[LEI]), NOT ISBLANK([CET1 Ratio])),
+			    [CET1 Ratio]
+			)
+		formatString: 0.0%
+		lineageTag: 07cfc0e6-9e6e-5eec-8f19-0c2ad23c389b
+
+	/// How far the equal-weighted average overstates the sector ratio, in percentage points.
+	measure 'Average Minus Aggregate' =
+			IF(
+			    NOT ISBLANK([CET1 Ratio]),
+			    [CET1 Ratio, Average of Banks] - [CET1 Ratio]
+			)
+		formatString: 0.0%
+		lineageTag: d5788c0d-d9f0-5df2-9a7a-45b0e4a4e6eb
+
+	/// The sector ratio over the 101 banks present in every quarter, so a quarter-on-quarter
+	/// move is the banks moving, not the membership.
+	measure 'CET1 Ratio (Constant Panel)' = CALCULATE([CET1 Ratio], KEEPFILTERS('Bank'[In Constant Panel] = "Yes"))
+		formatString: 0.0%
+		lineageTag: 06d9ed1e-4644-563c-a1de-4eae02b65b2d
+
+	measure 'CET1 Ratio, Average of Banks (Constant Panel)' = CALCULATE([CET1 Ratio, Average of Banks], KEEPFILTERS('Bank'[In Constant Panel] = "Yes"))
+		formatString: 0.0%
+		lineageTag: eb793b08-07b1-54d0-bb55-1d41a58a7ec4
+
+	measure 'Leverage Ratio (Constant Panel)' = CALCULATE([Leverage Ratio], KEEPFILTERS('Bank'[In Constant Panel] = "Yes"))
+		formatString: 0.00%
+		lineageTag: 93f0e2ee-8f73-5b64-acc3-6c7fbf2f28d8
+
+	/// Constant panel, four quarters before the last one in view.
+	measure 'CET1 Ratio a Year Earlier' =
+			VAR p = MAX('Period'[Period Sort])
+			RETURN
+			    CALCULATE([CET1 Ratio], KEEPFILTERS('Bank'[In Constant Panel] = "Yes"), REMOVEFILTERS('Period'), 'Period'[Period Sort] = p - 4)
+		formatString: 0.0%
+		lineageTag: d2fbca3c-b9e8-5576-92ec-96e85f73efa0
+
+	/// Percentage points, constant panel.
+	measure 'CET1 Change on Year' =
+			VAR Earlier = [CET1 Ratio a Year Earlier]
+			RETURN
+			    IF(NOT ISBLANK(Earlier), [CET1 Ratio (Constant Panel)] - Earlier)
+		formatString: +0.0%;-0.0%;0.0%
+		lineageTag: 20ebadd9-ce5d-5391-b2be-599681ff13f2
+
+	/// The ten OV1 lines that add to total risk exposure. They reconcile to the reported total
+	/// for every bank in every quarter, to a thousandth of a million.
+	measure 'RWA by Component' =
+			VAR p = MAX('Period'[Period Sort])
+			RETURN
+			    CALCULATE(
+			        SUM('Prudential'[Amount]) / 1000,
+			        KEEPFILTERS('Item'[RWA Component] <> ""),
+			        'Period'[Period Sort] = p
+			    )
+		formatString: €#,0\b\n
+		lineageTag: f4c1689e-33ac-5751-a623-5e07fba72880
+
+	measure 'RWA Share' = DIVIDE([RWA by Component], CALCULATE([RWA by Component], REMOVEFILTERS('Item')))
+		formatString: 0.0%
+		lineageTag: df663bf6-c429-5b20-96ec-b1689424fb0e
+
+	/// The ratio before the output floor is applied. 2025 onwards.
+	measure 'CET1 Ratio Pre-Floor' = IF(NOT ISBLANK([RWA Pre-Floor]), DIVIDE([CET1 Capital], [RWA Pre-Floor]))
+		formatString: 0.0%
+		lineageTag: 7e6dedf1-452a-57ca-b45c-3a6d3ba3473f
+
+	/// Ratio points lost to the floor. In 2025 the floor binds on one bank.
+	measure 'Output Floor Cost' = IF(NOT ISBLANK([CET1 Ratio Pre-Floor]), [CET1 Ratio Pre-Floor] - [CET1 Ratio])
+		formatString: 0.00%
+		lineageTag: f45b1542-b55f-5e24-b58d-1d4906ab6971
+
+	/// Gross carrying amount, loans and advances at amortised cost, all three stages.
+	measure 'Gross Loans' =
+			VAR p = MAX('Period'[Period Sort])
+			RETURN
+			    CALCULATE(
+			        SUM('Prudential'[Amount]) / 1000,
+			        'Item'[Item Key] = 2521019,
+			        'Period'[Period Sort] = p
+			    )
+		formatString: €#,0\b\n
+		lineageTag: 46eaf0ce-bd6b-50a8-9243-177b2157ce82
+
+	measure 'Stage 2 Loans' =
+			VAR p = MAX('Period'[Period Sort])
+			RETURN
+			    CALCULATE(
+			        SUM('Prudential'[Amount]) / 1000,
+			        'Item'[Item Key] = 2521019,
+			        'Stage'[Stage Key] = 2,
+			        'Period'[Period Sort] = p
+			    )
+		formatString: €#,0\b\n
+		lineageTag: 5e83d389-fa21-50c5-959b-305e8738d3e3
+
+	/// Credit-impaired - the IFRS 9 successor to the non-performing loan.
+	measure 'Stage 3 Loans' =
+			VAR p = MAX('Period'[Period Sort])
+			RETURN
+			    CALCULATE(
+			        SUM('Prudential'[Amount]) / 1000,
+			        'Item'[Item Key] = 2521019,
+			        'Stage'[Stage Key] = 3,
+			        'Period'[Period Sort] = p
+			    )
+		formatString: €#,0\b\n
+		lineageTag: 55b55e80-a833-58b9-9e97-c70ced30abc3
+
+	/// Loans with a significant increase in credit risk since origination. The early-warning
+	/// line: stage 2 moves before stage 3 does.
+	measure 'Stage 2 Ratio' = DIVIDE([Stage 2 Loans], [Gross Loans])
+		formatString: 0.00%
+		lineageTag: 47cb5556-b416-5270-bb7f-3d1f5fbb2319
+
+	measure 'Stage 3 Ratio' = DIVIDE([Stage 3 Loans], [Gross Loans])
+		formatString: 0.00%
+		lineageTag: 4eec445f-3c1a-588e-aa5e-14511a138567
+
+	/// Accumulated impairment on stage 3 loans. Reported negative.
+	measure 'Stage 3 Allowance' =
+			VAR p = MAX('Period'[Period Sort])
+			RETURN
+			    CALCULATE(
+			        SUM('Prudential'[Amount]) / 1000,
+			        'Item'[Item Key] = 2521029,
+			        'Stage'[Stage Key] = 3,
+			        'Period'[Period Sort] = p
+			    )
+		formatString: €#,0\b\n
+		lineageTag: 5c6b2c82-5542-5eed-9e30-19a199d844d5
+
+	/// How much of the impaired book is already provided for.
+	measure 'Stage 3 Coverage' = DIVIDE(-[Stage 3 Allowance], [Stage 3 Loans])
+		formatString: 0.0%
+		lineageTag: 8a48232e-51f3-5d72-835c-c879682095fe
+
+	measure 'Interest Income FY' =
+			VAR y = CALCULATE(MAX('Period'[Year]), 'Period'[Quarter No] = 4)
+			RETURN
+			    CALCULATE(
+			        SUM('Prudential'[Amount]) / 1000,
+			        'Item'[Item Key] = 2520301,
+			        'Prudential'[Quarters In YTD] = 4,
+			        'Period'[Year] = y
+			    )
+		formatString: €#,0\b\n
+		lineageTag: 25c71da1-c0d8-5b34-ab62-2a2248bb85b2
+
+	measure 'Interest Expense FY' =
+			VAR y = CALCULATE(MAX('Period'[Year]), 'Period'[Quarter No] = 4)
+			RETURN
+			    CALCULATE(
+			        SUM('Prudential'[Amount]) / 1000,
+			        'Item'[Item Key] = 2520304,
+			        'Prudential'[Quarters In YTD] = 4,
+			        'Period'[Year] = y
+			    )
+		formatString: €#,0\b\n
+		lineageTag: 61be2520-8357-50bd-86b4-42a30df5384d
+
+	measure 'Net Interest Income FY' = [Interest Income FY] - [Interest Expense FY]
+		formatString: €#,0\b\n
+		lineageTag: 95dc1126-f3f1-5d47-b682-575cd999bac6
+
+	/// Total operating income, net.
+	measure 'Operating Income FY' =
+			VAR y = CALCULATE(MAX('Period'[Year]), 'Period'[Quarter No] = 4)
+			RETURN
+			    CALCULATE(
+			        SUM('Prudential'[Amount]) / 1000,
+			        'Item'[Item Key] = 2520316,
+			        'Prudential'[Quarters In YTD] = 4,
+			        'Period'[Year] = y
+			    )
+		formatString: €#,0\b\n
+		lineageTag: 9457c22e-5337-5ef2-aa5d-f0cd0bb43241
+
+	/// Administrative expenses and depreciation. Reported positive.
+	measure 'Operating Expenses FY' =
+			VAR y = CALCULATE(MAX('Period'[Year]), 'Period'[Quarter No] = 4)
+			RETURN
+			    CALCULATE(
+			        SUM('Prudential'[Amount]) / 1000,
+			        'Item'[Item Key] IN {2520317, 2520318},
+			        'Prudential'[Quarters In YTD] = 4,
+			        'Period'[Year] = y
+			    )
+		formatString: €#,0\b\n
+		lineageTag: 83e2ed42-68e5-5137-b650-f6c60cb5dd61
+
+	measure 'Cost to Income' = DIVIDE([Operating Expenses FY], [Operating Income FY])
+		formatString: 0.0%
+		lineageTag: 7e64370e-9e0d-52d0-9bcb-b4627b0b3da2
+
+	/// Impairment on financial assets not at fair value - the P&L charge for credit losses.
+	measure 'Impairments FY' =
+			VAR y = CALCULATE(MAX('Period'[Year]), 'Period'[Quarter No] = 4)
+			RETURN
+			    CALCULATE(
+			        SUM('Prudential'[Amount]) / 1000,
+			        'Item'[Item Key] = 2520324,
+			        'Prudential'[Quarters In YTD] = 4,
+			        'Period'[Year] = y
+			    )
+		formatString: €#,0\b\n
+		lineageTag: 044f1d24-64c6-5162-b81f-2bfdb4f1cc15
+
+	/// Profit or loss for the financial year.
+	measure 'Profit FY' =
+			VAR y = CALCULATE(MAX('Period'[Year]), 'Period'[Quarter No] = 4)
+			RETURN
+			    CALCULATE(
+			        SUM('Prudential'[Amount]) / 1000,
+			        'Item'[Item Key] = 2520335,
+			        'Prudential'[Quarters In YTD] = 4,
+			        'Period'[Year] = y
+			    )
+		formatString: €#,0\b\n
+		lineageTag: be0a393b-70d0-5f78-96a8-4c29b9fbb258
+
+	measure 'Year-End Equity' =
+			VAR y = CALCULATE(MAX('Period'[Year]), 'Period'[Quarter No] = 4)
+			RETURN
+			    CALCULATE([Total Equity], 'Period'[Year] = y, 'Period'[Quarter No] = 4)
+		formatString: €#,0\b\n
+		lineageTag: f1d71051-c4f5-55f7-bfaf-6c3a59704043
+
+	/// Full-year profit over year-end equity.
+	measure 'Return on Equity' = DIVIDE([Profit FY], [Year-End Equity])
+		formatString: 0.0%
+		lineageTag: e2f11c3a-8d01-5bd2-af9d-c7f61ddd6505
+
+	measure 'Net Interest Share' = DIVIDE([Net Interest Income FY], [Operating Income FY])
+		formatString: 0.0%
+		lineageTag: 7666b626-9f6d-5117-847d-282c66e35c79
+
+	/// What adding up a year's four reported P&L figures gives: March once, June twice, September
+	/// three times, December's own. It reads about two and a half times the real profit. Kept
+	/// because it is the easiest mistake to make with this file, and the report shows it.
+	measure 'Profit, YTD Figures Added' =
+			VAR y = CALCULATE(MAX('Period'[Year]), 'Period'[Quarter No] = 4)
+			RETURN
+			    CALCULATE(SUM('Prudential'[Amount]) / 1000, 'Item'[Item Key] = 2520335, 'Period'[Year] = y)
+		formatString: €#,0\b\n
+		lineageTag: 123d7884-5405-52ab-af32-2277aca66fbd
+
+	measure 'YTD Overstatement' = DIVIDE([Profit, YTD Figures Added] - [Profit FY], [Profit FY])
+		formatString: 0%
+		lineageTag: 401f93b4-1238-5ba3-8752-c2afb011d0b4
+
+	/// De-cumulated: this quarter's profit alone. Blank where it cannot be derived.
+	measure 'Profit in Quarter' = CALCULATE(SUM('Prudential'[Quarterly]) / 1000, 'Item'[Item Key] = 2520335)
+		formatString: €#,0\b\n
+		lineageTag: 5bd1a69f-f670-5a5a-b6a0-37e032712d09
+
+	measure 'Profit in Quarter (Constant Panel)' = CALCULATE([Profit in Quarter], KEEPFILTERS('Bank'[In Constant Panel] = "Yes"))
+		formatString: €#,0\b\n
+		lineageTag: a8a5ba5d-9579-5fbb-9f1f-ddd1a9f9aee2
+
+	/// The quarter every stock on the page is read at.
+	measure 'As At' =
+			VAR p = MAX('Period'[Period Sort])
+			RETURN
+			    LOOKUPVALUE('Period'[Quarter], 'Period'[Period Sort], p)
+		lineageTag: bbf5bc74-897d-5b5b-8612-88675cf6cf98
+
+	measure 'Financial Year' =
+			VAR y = CALCULATE(MAX('Period'[Year]), 'Period'[Quarter No] = 4)
+			RETURN
+			    IF(ISBLANK(y), "No complete year", "FY " & y)
+		lineageTag: a435b141-58f6-5ab2-ab30-56dfdc3181c4
+
+	column Column
+		dataType: string
+		isHidden
+		lineageTag: ae2b0f5e-8e91-52e3-b9d5-e512f03735a9
+		summarizeBy: none
+		sourceColumn: Column
+
+	partition Metrics = m
+		mode: import
+		source =
+				let
+				    Source = #table(type table [Column = text], {})
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
