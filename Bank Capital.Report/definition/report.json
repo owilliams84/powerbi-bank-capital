@@ -62,6 +62,91 @@
           "name": "MilestoneMark.svg",
           "path": "MilestoneMark.svg",
           "type": "Image"
+        },
+        {
+          "name": "IconAlertCircle.svg",
+          "path": "IconAlertCircle.svg",
+          "type": "Image"
+        },
+        {
+          "name": "IconBank.svg",
+          "path": "IconBank.svg",
+          "type": "Image"
+        },
+        {
+          "name": "IconBars.svg",
+          "path": "IconBars.svg",
+          "type": "Image"
+        },
+        {
+          "name": "IconBarsLine.svg",
+          "path": "IconBarsLine.svg",
+          "type": "Image"
+        },
+        {
+          "name": "IconCalendar.svg",
+          "path": "IconCalendar.svg",
+          "type": "Image"
+        },
+        {
+          "name": "IconEuro.svg",
+          "path": "IconEuro.svg",
+          "type": "Image"
+        },
+        {
+          "name": "IconFloor.svg",
+          "path": "IconFloor.svg",
+          "type": "Image"
+        },
+        {
+          "name": "IconGauge.svg",
+          "path": "IconGauge.svg",
+          "type": "Image"
+        },
+        {
+          "name": "IconHandCoin.svg",
+          "path": "IconHandCoin.svg",
+          "type": "Image"
+        },
+        {
+          "name": "IconLayers.svg",
+          "path": "IconLayers.svg",
+          "type": "Image"
+        },
+        {
+          "name": "IconPercent.svg",
+          "path": "IconPercent.svg",
+          "type": "Image"
+        },
+        {
+          "name": "IconScales.svg",
+          "path": "IconScales.svg",
+          "type": "Image"
+        },
+        {
+          "name": "IconShieldCheck.svg",
+          "path": "IconShieldCheck.svg",
+          "type": "Image"
+        },
+        {
+          "name": "IconTrendDown.svg",
+          "path": "IconTrendDown.svg",
+          "type": "Image"
+        },
+        {
+          "name": "IconTrendUp.svg",
+          "path": "IconTrendUp.svg",
+          "type": "Image"
+        },
+        {
+          "name": "IconUmbrella.svg",
+          "path": "IconUmbrella.svg",
+          "type": "Image"
+        },
+        {
+          "name": "IconWarning.svg",
+          "path": "IconWarning.svg",
+          "type": "Image"
         }
       ]
     },
